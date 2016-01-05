@@ -1,11 +1,11 @@
-var _mainWindow;
+var _mainWindow, _messageWindow;
 
 document.addEventListener('DOMContentLoaded', function() {
-  // body...
-  init();
+    init();
 });
 
 init = function(){
+    _messageWindow = document.querySelector("#message")
     try{
         fin.desktop.main(function(){
             initWithOpenFin();
@@ -15,15 +15,20 @@ init = function(){
     }
 };
 
-
 initWithOpenFin = function(){
-console.log("We have OpenFin available.");
+    printMessage("We have OpenFin available.")
     if (!_mainWindow){
         _mainWindow = fin.desktop.Window.getCurrent()
     };
     OpenFinEventListeners.addAllEventListeners(_mainWindow);
     OpenFinEventListeners.listen("close-requested", closeRequestedCallback);
     initButtonListeners();
+};
+
+printMessage = function(message){
+    if(_messageWindow){
+        _messageWindow.innerHTML = message
+    }
 };
 
 initButtonListeners = function(){
@@ -45,22 +50,39 @@ initButtonListeners = function(){
 };
 
 closeRequestedCallback = function(evt){
-    console.log("Close Requested Callback ", evt)
+    console.log("Close Requested Callback ", evt);
+    delayForceCloseWindow(_mainWindow);
 };
 
 closeMainWindow = function(){
-    // OpenFinEventListeners.removeListenerByName(_mainWindow, "close-requested");
+    _mainWindow.close(false,
+        function(){
+            console.log("Close called ")
+        },
+        function(evt){
+            console.log("Close call failed  ", evt)
+        }
+    );
+};
 
-    _mainWindow.close(true,
-                        function(){
-                            console.log("Close called ")
-                        },
-                        function(evt){
-                            console.log("Close call failed  ", evt)
-                        }
-                        );
+delayForceCloseWindow = function(win){
+    printMessage("The window will close in three seconds.");
+    setTimeout(function(){
+        forceCloseWindow(win)
+    }, 3000);
+};
+
+forceCloseWindow = function(win){
+    win.close(true,
+        function(){
+            console.log("Close called ")
+        },
+        function(evt){
+            console.log("Close call failed  ", evt)
+        });
 }
 
 initWithoutOpenFin = function(){
     console.log("We have NO OpenFin ");
+    printMessage("We OpenFin is not available.")
 };
