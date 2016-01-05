@@ -44,25 +44,26 @@ initButtonListeners = function(){
         OpenFinEventListeners.removeListenerByName(_mainWindow, "bounds-changed");
     });
 
-    document.querySelector('#removeError').addEventListener("click", function(e){
-        OpenFinEventListeners.removeListenerByName(_mainWindow, "nonsense");
+    document.querySelector('#listWindows').addEventListener("click", function(e){
+        listWindows()
     });
 
     document.querySelector('#addWin').addEventListener("click", function(e){
         var _ext = new ExternalWindow();
-
         listWindows()
-
     });
 };
 
 listWindows = function(){
+    var _list = "__"
     fin.desktop.Application.getCurrent().getChildWindows(function (children) {
-        console.log(fin.desktop.Application.getCurrent().window.name);
+        _list += fin.desktop.Application.getCurrent().window.name +"<br>";
         children.forEach(function (childWindow) {
-            console.log("Showing child: " + childWindow.name);
+            _list += "Showing child: " + childWindow.name +"<br>";
             childWindow.show();
         });
+        console.log("_list")
+        printMessage(_list)
     });
 };
 
