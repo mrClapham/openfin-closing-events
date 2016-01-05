@@ -1,13 +1,13 @@
 {
-  "name": "mp3_playback",
+  "name": "OpenFin_windows",
   "version": "1.0.0",
   "description": "Testing MP3 integration of OpenFin apps",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start" :  "node server.js"
   },
   "keywords": [
-    "MP3",
     "OpenFin"
   ],
   "author": "Graham Clapham",
