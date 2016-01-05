@@ -1,0 +1,19 @@
+{
+  "devtools_port": 9090,
+  "startup_app": {
+    "name": "staging_app",
+    "description": "OpenFin API",
+    "url": "http://localhost:5060",
+    "uuid": "openfin-mp3-demo",
+    "autoShow": true
+  },
+  "runtime": {
+    "arguments": "",
+    "version": "beta"
+  },
+  "shortcut": {
+    "company": "OpenFin",
+    "description": "OpenFin API Demo",
+    "name": "OpenFin API Demo"
+  }
+}
