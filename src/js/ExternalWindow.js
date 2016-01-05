@@ -10,10 +10,10 @@ var _generateRandomName = function(){
         text += possible.charAt(Math.floor(Math.random() * possible.length));
 
     return text;
-}
+};
 
 
-ExternalWindow = (function(){
+ExternalWindow = function(){
     this._window_config = {
         alwaysOnTop: false,
         autoShow: true,
@@ -23,7 +23,7 @@ ExternalWindow = (function(){
         },
         defaultCentered:true,
         defaultHeight:300,
-        defaultLeft:200,
+        defaultLeft: (Math.random() * 500),
         defaultTop:100,
         defaultWidth:400,
         frame:true,
@@ -56,39 +56,17 @@ ExternalWindow = (function(){
     };
     var _initCallback = function(){
         console.log("Initialisation suceeded.")
-    }
+    };
     var _onIntFail = function(){
         console.log("Initialisation failed.")
+    };
+
+    var _this = this;
+    try{
+        fin.desktop.main(function(){
+            _this._window = new fin.desktop.Window(_this._window_config,_initCallback,_onIntFail);
+        })
+    }catch(err){
+        console.log("Error: ", err);
     }
-    this._window = new fin.desktop.Window(this._window_config,_initCallback,_onIntFail);
-
-})()
-
-//
-//var child = new fin.desktop.Window({
-//    name: "USDJPY",
-//    defaultWidth: 266,
-//    defaultHeight: 127
-//}, function () {
-//    // gets the HTML window of the child
-//    var wnd = child.getNativeWindow();
-//
-//    wnd.document.body.appendChild(fxPanelStylesheet);
-//    wnd.document.body.appendChild(fxPanel);
-//
-//    child.show();
-//});
-//
-//var child = new fin.desktop.Window({
-//    name: "USDJPY",
-//    defaultWidth: 266,
-//    defaultHeight: 127
-//}, function () {
-//    // gets the HTML window of the child
-//    var wnd = child.getNativeWindow();
-//
-//    wnd.document.body.appendChild(fxPanelStylesheet);
-//    wnd.document.body.appendChild(fxPanel);
-//
-//    child.show();
-//});
+};

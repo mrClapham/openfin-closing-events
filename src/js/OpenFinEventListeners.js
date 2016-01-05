@@ -30,7 +30,7 @@ OpenFinEventListeners = {
         _allEvents.map(function(d,i){
 
             _this.allEventCallbacks[i] = function (event) {
-                console.log(_allEvents[i], "called with event",event);
+                //console.log(_allEvents[i], "called with event",event);
                 _this.dispatchEvent(_allEvents[i], event);
             };
 

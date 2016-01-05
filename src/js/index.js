@@ -45,7 +45,24 @@ initButtonListeners = function(){
     });
 
     document.querySelector('#removeError').addEventListener("click", function(e){
-        OpenFinEventListeners.removeListenerByName(_mainWindow, "nonesense");
+        OpenFinEventListeners.removeListenerByName(_mainWindow, "nonsense");
+    });
+
+    document.querySelector('#addWin').addEventListener("click", function(e){
+        var _ext = new ExternalWindow();
+
+        listWindows()
+
+    });
+};
+
+listWindows = function(){
+    fin.desktop.Application.getCurrent().getChildWindows(function (children) {
+        console.log(fin.desktop.Application.getCurrent().window.name);
+        children.forEach(function (childWindow) {
+            console.log("Showing child: " + childWindow.name);
+            childWindow.show();
+        });
     });
 };
 
