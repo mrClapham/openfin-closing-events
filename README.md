@@ -6,7 +6,7 @@ Open a terminal window and navigate to the 'closing_events_1773' directory.
 run 
 
 ```
-$ npm start
+$ node server
 ```
 This should start a simple Node server, then, click the link below to install.
 
