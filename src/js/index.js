@@ -22,8 +22,6 @@ initWithOpenFin = function(){
     };
     OpenFinEventListeners.addAllEventListeners(_mainWindow);
     //OpenFinEventListeners.listen("close-requested", closeRequestedCallback);
-
-   // var openfinWindow = fin.desktop.Window.getCurrent();
     _mainWindow.addEventListener('close-requested', function(e) {
         var blah = confirm('are you sure?');
         if (blah== true) {
