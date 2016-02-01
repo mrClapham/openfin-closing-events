@@ -21,7 +21,18 @@ initWithOpenFin = function(){
         _mainWindow = fin.desktop.Window.getCurrent()
     };
     OpenFinEventListeners.addAllEventListeners(_mainWindow);
-    OpenFinEventListeners.listen("close-requested", closeRequestedCallback);
+    //OpenFinEventListeners.listen("close-requested", closeRequestedCallback);
+
+   // var openfinWindow = fin.desktop.Window.getCurrent();
+    _mainWindow.addEventListener('close-requested', function(e) {
+        var blah = confirm('are you sure?');
+        if (blah== true) {
+            _mainWindow.close(true);
+        }else{
+            console.log("The confirm was false")
+        }
+    });
+
     initButtonListeners();
 };
 
@@ -36,13 +47,13 @@ initButtonListeners = function(){
         closeMainWindow();
     });
 
-    document.querySelector('#removeAllListeners').addEventListener("click", function(e){
-        OpenFinEventListeners.removeAllEvemtListeners(_mainWindow);
-    });
+    //document.querySelector('#removeAllListeners').addEventListener("click", function(e){
+    //    OpenFinEventListeners.removeAllEvemtListeners(_mainWindow);
+    //});
 
-    document.querySelector('#removeBoundsChanged').addEventListener("click", function(e){
-        OpenFinEventListeners.removeListenerByName(_mainWindow, "bounds-changed");
-    });
+    //document.querySelector('#removeBoundsChanged').addEventListener("click", function(e){
+    //    OpenFinEventListeners.removeListenerByName(_mainWindow, "bounds-changed");
+    //});
 
     document.querySelector('#listWindows').addEventListener("click", function(e){
         listWindows()
